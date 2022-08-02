@@ -9,7 +9,7 @@ for i in 0..86 do
 
   puts link
 
-  open(link) do |image|
+  URI.open(link) do |image|
     File.open(File.join(dir, "#{i}.jpg"), "wb") do |file|
       file.write(image.read)
     end
