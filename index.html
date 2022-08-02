@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, sans-serif;
+    color: #1d1d1f;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 0 0 10px;
+}
+
+p {
+    font-size: 22px;
+}
+
+.content {
+    padding: 40px;
+    text-align: center;
+}
+
+.hero-sequence {
+    height: 430vh;
+}
+
+.sticky-element {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 1033px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+
+.sequence-element {
+    width: 1336px;
+    height: 786px;
+}
+
+footer {
+    background: #f5f5f7;
+    font-weight: 700;
+    font-size: 40px;
+    height: 400px;
+    display: grid;
+    place-items: center;
+}
+</style>
+
+<title>Apple Sequence Animation</title>
+
+<div class="content">
+    <h1>Apple Sequence Animation</h1>
+    <p>Scroll down to admire the magic.</p>
+</div>
+
+<div class="hero-sequence">
+    <div class="sticky-element">
+        <div class="sequence-element">
+            <canvas width="1336" height="786"></canvas>
+        </div>
+    </div>
+</div>
+
+<footer>
+    You are awesome!
+</footer>
+
+<script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    const heroSequence = document.querySelector('.hero-sequence')
+    const images = []
+    const frameCount = 87
+
+    const prepareImages = () => {
+        for (var i = 0; i < frameCount; i++) {
+          const image = new Image()
+          image.src = `./images/${i}.jpg`
+          images.push(image)
+
+          if (i === 0) {
+            images[i].onload = () => drawImage(0)
+          }
+        }
+    }
+
+    const drawImage = frameIndex => {
+        ctx.drawImage(images[frameIndex], 0, 0)
+    }
+
+    prepareImages()
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop - heroSequence.offsetTop
+        const maxScrollTop = heroSequence.scrollHeight - window.innerHeight
+        const scrollFraction = scrollTop / maxScrollTop
+        const frameIndex = Math.max(0, Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount)))
+
+        images[frameIndex].onload = () => drawImage(frameIndex)
+        requestAnimationFrame(() => drawImage(frameIndex))
+    })
+</script>
