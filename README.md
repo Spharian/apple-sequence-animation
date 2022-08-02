@@ -1,6 +1,6 @@
 # Apple Scroll Sequence animation
 
-Check the live demo [here](https://www.sfertons.dev/lab/apple-scroll-sequence-animation)
+Check the live demo [here](https://www.sfertons.dev/lab/apple-scroll-sequence-animation).
 
 ## Install
 
