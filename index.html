@@ -72,37 +72,37 @@ footer {
 </footer>
 
 <script>
-    const canvas = document.querySelector('canvas')
-    const ctx = canvas.getContext('2d')
-    const heroSequence = document.querySelector('.hero-sequence')
-    const images = []
-    const frameCount = 87
+const canvas = document.querySelector('canvas')
+const ctx = canvas.getContext('2d')
+const heroSequence = document.querySelector('.hero-sequence')
+const images = []
+const frameCount = 87
 
-    const prepareImages = () => {
-        for (var i = 0; i < frameCount; i++) {
-          const image = new Image()
-          image.src = `./images/${i}.jpg`
-          images.push(image)
+const prepareImages = () => {
+    for (var i = 0; i < frameCount; i++) {
+      const image = new Image()
+      image.src = `./images/${i}.jpg`
+      images.push(image)
 
-          if (i === 0) {
-            images[i].onload = () => drawImage(0)
-          }
-        }
+      if (i === 0) {
+        images[i].onload = () => drawImage(0)
+      }
     }
+}
 
-    const drawImage = frameIndex => {
-        ctx.drawImage(images[frameIndex], 0, 0)
-    }
+const drawImage = frameIndex => {
+    ctx.drawImage(images[frameIndex], 0, 0)
+}
 
-    prepareImages()
+prepareImages()
 
-    window.addEventListener('scroll', () => {
-        const scrollTop = document.documentElement.scrollTop - heroSequence.offsetTop
-        const maxScrollTop = heroSequence.scrollHeight - window.innerHeight
-        const scrollFraction = scrollTop / maxScrollTop
-        const frameIndex = Math.max(0, Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount)))
+window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop - heroSequence.offsetTop
+    const maxScrollTop = heroSequence.scrollHeight - window.innerHeight
+    const scrollFraction = scrollTop / maxScrollTop
+    const frameIndex = Math.max(0, Math.min(frameCount - 1, Math.ceil(scrollFraction * frameCount)))
 
-        images[frameIndex].onload = () => drawImage(frameIndex)
-        requestAnimationFrame(() => drawImage(frameIndex))
-    })
+    images[frameIndex].onload = () => drawImage(frameIndex)
+    requestAnimationFrame(() => drawImage(frameIndex))
+})
 </script>
