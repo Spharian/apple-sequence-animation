@@ -1,6 +1,6 @@
 # Apple Scroll Sequence animation
 
-Check the live demo [here](https://spharian.vercel.app/lab/apple-scroll-sequence-animation).
+Check the live demo [here](https://spharian.vercel.app/lab/apple-sequence-animation).
 
 ## Install
 
